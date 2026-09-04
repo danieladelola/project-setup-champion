@@ -176,7 +176,7 @@ export function SiteFooter() {
               We Accept
             </span>
             <img
-              src={paymentMethodsAsset}
+              src={paymentMethodsAsset.url}
               alt="Accepted payment methods: Visa, PayPal, Mastercard, Maestro"
               loading="lazy"
               className="h-14 w-auto md:h-16"
