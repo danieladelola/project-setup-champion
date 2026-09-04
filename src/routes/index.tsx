@@ -19,7 +19,7 @@ import heroImg from "../assets/home-hero.png";
 import aboutMassage from "../assets/about/about-massage.jpg";
 import aboutTeeth from "../assets/about/about-teeth.jpg";
 import aboutManicure from "../assets/about/about-manicure.jpg";
-import videoCover from "../assets/video-cover.png.asset.json";
+import videoCover from "../assets/video-cover.jpg";
 import { Testimonials } from "../components/testimonials";
 import { publicApi } from "../lib/admin-api";
 import { formatPrice, unitPriceOf } from "../lib/cart";
@@ -116,7 +116,7 @@ function VideoCover() {
       }`}
     >
       <img
-        src={videoCover.url}
+        src={videoCover}
         alt="Mayor Beauty Place treatment preview"
         width={1024}
         height={1280}

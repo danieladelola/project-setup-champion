@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Check } from "lucide-react";
 
-import heroSpa from "../assets/about-hero-spa.png.asset.json";
+import heroSpa from "../assets/about-hero-spa.jpg";
 import aboutFacial from "../assets/about/about-facial.jpg";
 import aboutMassage from "../assets/about/about-massage.jpg";
 import aboutManicure from "../assets/about/about-manicure.jpg";
@@ -60,7 +60,7 @@ function About() {
       {/* HERO BAND */}
       <section className="relative isolate overflow-hidden border-b border-brand-red/20 px-8 pt-40 pb-28 text-center md:pt-52">
         <img
-          src={heroSpa.url}
+          src={heroSpa}
           alt="Therapist performing a relaxing massage treatment in a candlelit spa room"
           className="absolute inset-0 -z-10 h-full w-full object-cover"
         />

@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 
 import logoAsset from "../assets/logo.png";
-import paymentMethodsAsset from "../assets/payment-methods.png.asset.json";
+import paymentMethodsAsset from "../assets/payment-methods.png";
 
 function WhatsApp({ className }: { className?: string }) {
   return (
@@ -176,7 +176,7 @@ export function SiteFooter() {
               We Accept
             </span>
             <img
-              src={paymentMethodsAsset.url}
+              src={paymentMethodsAsset}
               alt="Accepted payment methods: Visa, PayPal, Mastercard, Maestro"
               loading="lazy"
               className="h-14 w-auto md:h-16"
