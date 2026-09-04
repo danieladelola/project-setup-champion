@@ -70,7 +70,7 @@ export function Testimonials() {
   };
 
   return (
-    <section className="bg-background px-6 py-16 text-foreground md:px-12 md:py-20">
+    <section className="bg-background px-6 py-14 text-foreground md:px-12 md:py-16">
       <div className="mx-auto max-w-6xl">
         <div className="mb-8 flex flex-col gap-6 md:mb-10 md:flex-row md:items-end md:justify-between">
           <div>
