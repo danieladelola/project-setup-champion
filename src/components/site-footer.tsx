@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 
 import logoAsset from "../assets/logo.png";
-import paymentMethodsAsset from "../assets/payment-methods.png";
+import paymentMethodsAsset from "../assets/payment-methods.png.asset.json";
 
 function WhatsApp({ className }: { className?: string }) {
   return (
