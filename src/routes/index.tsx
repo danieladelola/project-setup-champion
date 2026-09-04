@@ -5,9 +5,11 @@ import {
   Check,
   ClipboardList,
   Gem,
+  Heart,
   MessageCircle,
   Play,
   ShieldCheck,
+  ShoppingBag,
   Sparkles,
   Users,
 } from "lucide-react";
@@ -21,8 +23,11 @@ import aboutTeeth from "../assets/about/about-teeth.jpg";
 import aboutManicure from "../assets/about/about-manicure.jpg";
 import videoCover from "../assets/video-cover.jpg";
 import { Testimonials } from "../components/testimonials";
-import { publicApi } from "../lib/admin-api";
-import { formatPrice, unitPriceOf } from "../lib/cart";
+import { toast } from "sonner";
+
+import { publicApi, type Product } from "../lib/admin-api";
+import { formatPrice, unitPriceOf, useCart } from "../lib/cart";
+import { useWishlist } from "../lib/wishlist";
 
 const title = "Mayor Beauty Place — Beauty Empire in Peckham, London";
 const description =
