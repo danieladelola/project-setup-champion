@@ -275,7 +275,7 @@ function Index() {
       </section>
 
       {/* About */}
-      <section className="bg-background px-6 py-24 md:px-12 md:py-32">
+      <section className="bg-background px-6 py-16 md:px-12 md:py-20">
         <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2 lg:gap-24">
           {/* Image Composition */}
           <div className="relative grid h-[520px] grid-cols-12 grid-rows-12 gap-4 sm:h-[600px] lg:h-[700px]">
@@ -381,7 +381,7 @@ function Index() {
       </section>
 
       {/* Pillars */}
-      <section className="bg-secondary px-6 py-24 md:px-12 md:py-32">
+      <section className="bg-secondary px-6 py-16 md:px-12 md:py-20">
         <div className="mx-auto max-w-6xl">
           <div className="mb-16 max-w-xl">
             <span className="mb-4 block font-sans font-medium text-[11px] uppercase tracking-[0.3em] text-brand-red">
@@ -417,7 +417,7 @@ function Index() {
       </section>
 
       {/* Shop teaser */}
-      <section className="bg-[#2645D8] px-6 py-24 text-on-dark md:px-12 md:py-32">
+      <section className="bg-[#2645D8] px-6 py-16 text-on-dark md:px-12 md:py-20">
         <div className="mx-auto max-w-6xl">
           <div className="mb-16 flex flex-wrap items-end justify-between gap-6">
             <div>
@@ -449,7 +449,7 @@ function Index() {
       </section>
 
       {/* How We Work */}
-      <section className="bg-card px-6 py-24 md:px-12 md:py-32">
+      <section className="bg-card px-6 py-16 md:px-12 md:py-20">
         <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Video */}
           <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-black shadow-lift">
