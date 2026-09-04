@@ -5,9 +5,11 @@ import {
   Check,
   ClipboardList,
   Gem,
+  Heart,
   MessageCircle,
   Play,
   ShieldCheck,
+  ShoppingBag,
   Sparkles,
   Users,
 } from "lucide-react";
@@ -21,8 +23,11 @@ import aboutTeeth from "../assets/about/about-teeth.jpg";
 import aboutManicure from "../assets/about/about-manicure.jpg";
 import videoCover from "../assets/video-cover.jpg";
 import { Testimonials } from "../components/testimonials";
-import { publicApi } from "../lib/admin-api";
-import { formatPrice, unitPriceOf } from "../lib/cart";
+import { toast } from "sonner";
+
+import { publicApi, type Product } from "../lib/admin-api";
+import { formatPrice, unitPriceOf, useCart } from "../lib/cart";
+import { useWishlist } from "../lib/wishlist";
 
 const title = "Mayor Beauty Place — Beauty Empire in Peckham, London";
 const description =
@@ -127,6 +132,88 @@ function VideoCover() {
         <Play className="h-6 w-6 fill-current" />
       </span>
     </button>
+  );
+}
+
+function ShopTeaserCard({ product: p }: { product: Product }) {
+  const cart = useCart();
+  const wishlist = useWishlist();
+  const saved = wishlist.has(p.id);
+  const inStock = p.stock_quantity > 0;
+
+  return (
+    <article className="group rounded-3xl bg-on-dark/10 p-5 transition-colors hover:bg-on-dark/20">
+      <div className="relative mb-6 aspect-[4/5] overflow-hidden rounded-2xl bg-on-dark/10">
+        <button
+          type="button"
+          aria-label={saved ? `Remove ${p.name} from wishlist` : `Save ${p.name} to wishlist`}
+          aria-pressed={saved}
+          onClick={() => {
+            const added = wishlist.toggle({
+              product_id: p.id,
+              slug: p.slug,
+              name: p.name,
+              image_url: p.image_url,
+              unit_price: unitPriceOf(p),
+            });
+            toast.success(
+              added
+                ? `${p.name} saved to your wishlist`
+                : `${p.name} removed from your wishlist`,
+            );
+          }}
+          className="absolute top-3 right-3 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-card/90 text-ink shadow-soft backdrop-blur transition-colors hover:text-brand-red"
+        >
+          <Heart className={`h-4 w-4 ${saved ? "fill-brand-red text-brand-red" : ""}`} />
+        </button>
+        <Link to="/shop/$slug" params={{ slug: p.slug }} className="block h-full w-full">
+          {p.image_url ? (
+            <img
+              src={p.image_url}
+              alt={p.name}
+              width={800}
+              height={1000}
+              loading="lazy"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          ) : null}
+        </Link>
+      </div>
+      <div className="flex items-center justify-between gap-3 px-1">
+        <div>
+          <div className="text-[10px] tracking-widest text-on-dark/60 uppercase">
+            {p.category ?? "Beauty"}
+          </div>
+          <h3 className="mt-1 text-sm font-semibold">
+            <Link to="/shop/$slug" params={{ slug: p.slug }}>
+              {p.name}
+            </Link>
+          </h3>
+        </div>
+        <p className="font-display text-lg">{formatPrice(unitPriceOf(p))}</p>
+      </div>
+      <button
+        type="button"
+        disabled={!inStock}
+        onClick={() => {
+          cart.add(
+            {
+              product_id: p.id,
+              slug: p.slug,
+              name: p.name,
+              image_url: p.image_url,
+              unit_price: unitPriceOf(p),
+            },
+            1,
+          );
+          toast.success(`${p.name} added to your bag`);
+        }}
+        className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-full bg-on-dark px-5 py-2.5 text-xs font-semibold text-[#2645D8] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        <ShoppingBag className="h-3.5 w-3.5" />
+        {inStock ? "Add to Bag" : "Sold out"}
+      </button>
+    </article>
   );
 }
 
@@ -352,36 +439,7 @@ function Index() {
           {featured.length > 0 ? (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {featured.map((p) => (
-              <Link
-                to="/shop/$slug"
-                params={{ slug: p.slug }}
-                key={p.id}
-                className="group rounded-3xl bg-on-dark/10 p-5 transition-colors hover:bg-on-dark/20"
-              >
-                <div className="mb-6 aspect-[4/5] overflow-hidden rounded-2xl bg-on-dark/10">
-                  {p.image_url ? (
-                    <img
-                      src={p.image_url}
-                      alt={p.name}
-                      width={800}
-                      height={1000}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : null}
-                </div>
-                <div className="flex items-center justify-between gap-3 px-1">
-                  <div>
-                    <div className="text-[10px] tracking-widest text-on-dark/60 uppercase">
-                      {p.category ?? "Beauty"}
-                    </div>
-                    <h3 className="mt-1 text-sm font-semibold">{p.name}</h3>
-                  </div>
-                  <p className="font-display text-lg">
-                    {formatPrice(unitPriceOf(p))}
-                  </p>
-                </div>
-              </Link>
+              <ShopTeaserCard key={p.id} product={p} />
             ))}
           </div>
           ) : (
