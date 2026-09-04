@@ -352,36 +352,7 @@ function Index() {
           {featured.length > 0 ? (
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {featured.map((p) => (
-              <Link
-                to="/shop/$slug"
-                params={{ slug: p.slug }}
-                key={p.id}
-                className="group rounded-3xl bg-on-dark/10 p-5 transition-colors hover:bg-on-dark/20"
-              >
-                <div className="mb-6 aspect-[4/5] overflow-hidden rounded-2xl bg-on-dark/10">
-                  {p.image_url ? (
-                    <img
-                      src={p.image_url}
-                      alt={p.name}
-                      width={800}
-                      height={1000}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                  ) : null}
-                </div>
-                <div className="flex items-center justify-between gap-3 px-1">
-                  <div>
-                    <div className="text-[10px] tracking-widest text-on-dark/60 uppercase">
-                      {p.category ?? "Beauty"}
-                    </div>
-                    <h3 className="mt-1 text-sm font-semibold">{p.name}</h3>
-                  </div>
-                  <p className="font-display text-lg">
-                    {formatPrice(unitPriceOf(p))}
-                  </p>
-                </div>
-              </Link>
+              <ShopTeaserCard key={p.id} product={p} />
             ))}
           </div>
           ) : (
